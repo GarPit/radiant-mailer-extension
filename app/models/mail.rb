@@ -107,10 +107,9 @@ class Mail
       )
       @sent = true
     end
-    rescue Exception => e
-      errors['base'] = e.message
-      @sent = false
-    end
+  rescue Exception => e
+    errors['base'] = e.message
+    @sent = false
   end
 
   def sent?
