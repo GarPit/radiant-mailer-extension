@@ -10,6 +10,7 @@ class Mail
   def self.valid_config?(config)
     return false if config.blank?
     config.keys.each do |key|
+      next if key == :redirect_to
       return false if config[key]['recipients'].blank? and config[key]['recipients_field'].blank?
       return false if config[key]['from'].blank? and config[key]['from_field'].blank?
     end
