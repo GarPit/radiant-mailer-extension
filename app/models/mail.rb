@@ -8,11 +8,12 @@ class Mail
   end
 
   def self.valid_config?(config)
-    return false if config.blank?
-    config.keys.each do |key|
-      next if key == :redirect_to
-      return false if config[key]['recipients'].blank? and config[key]['recipients_field'].blank?
-      return false if config[key]['from'].blank? and config[key]['from_field'].blank?
+    mail_config = config.dup
+    return false if mail_config.blank?
+    mail_config.delete(:redirect_to)
+    mail_config.keys.each do |key|
+      return false if mail_config[key]['recipients'].blank? and mail_config[key]['recipients_field'].blank?
+      return false if mail_config[key]['from'].blank? and mail_config[key]['from_field'].blank?
     end
     true
   end
