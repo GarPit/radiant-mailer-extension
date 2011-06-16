@@ -91,7 +91,7 @@ class Mail
       end
 
       headers = { 'Reply-To' => reply_to(config_key) || from(config_key) }
-      if sender
+      if sender(config_key)
         headers['Return-Path'] = sender(config_key)
         headers['Sender'] = sender(config_key)
       end
