@@ -10,8 +10,10 @@ module MailerProcess
     # If configured to do so, receive and process the mailer POST
     if Radiant::Config['mailer.post_to_page?'] && request.post? && request.parameters[:mailer]
       config, part_page = mailer_config_and_page
+      mail_config = config.dup
+      mail_config.delete(:redirect_to)
 
-      mail = Mail.new(part_page, config, request.parameters[:mailer])
+      mail = Mail.new(part_page, mail_config, request.parameters[:mailer])
       self.last_mail = part_page.last_mail = mail
 
       if mail.send
