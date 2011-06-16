@@ -8,8 +8,10 @@ class MailController < ApplicationController
     @page.request, @page.response = request, response
 
     config, part_page = config_and_page(@page)
+    mail_config = config.dup
+    mail_config.delete(:redirect_to)
 
-    mail = Mail.new(part_page, config, params[:mailer])
+    mail = Mail.new(part_page, mail_config, params[:mailer])
     @page.last_mail = part_page.last_mail = mail
     process_mail(mail, config)
 
