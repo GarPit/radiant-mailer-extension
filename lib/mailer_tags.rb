@@ -9,7 +9,7 @@ module MailerTags
         page = page.parent
       end
       string = page.render_part(:mailer)
-      (string.empty? ? {} : YAML::load(string))
+      (string.empty? ? {} : YAML::load(string).symbolize_keys)
     end
   end
 
